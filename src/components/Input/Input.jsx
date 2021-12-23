@@ -56,12 +56,18 @@ const StyledLabel = styled.label`
   transition: all 0.2s ease;
 `;
 
-const Input = ({ id, type, placeholder }) => {
+const Input = ({ id, type, placeholder, value, onChange }) => {
   return (
     <StyledDiv>
-      <StyledInput id={id} type={type} placeholder=" " />
+      <StyledInput
+        value={value}
+        onChange={onChange}
+        id={id}
+        type={type}
+        placeholder=" "
+      />
 
-      <StyledLabel for={id} className="input-label">
+      <StyledLabel htmlFor={id} className="input-label">
         {placeholder}
       </StyledLabel>
     </StyledDiv>
@@ -72,6 +78,8 @@ Input.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 Input.defaultProps = {

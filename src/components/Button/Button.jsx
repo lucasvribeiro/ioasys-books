@@ -61,7 +61,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  bgColor: "#FFFFFFF",
+  bgColor: "#FFFFFF",
   fnColor: "#B22E6F",
   border: "none",
   fontSize: "16px",
