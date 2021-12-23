@@ -7,12 +7,13 @@ const StyledDiv = styled.div`
 
 const StyledInput = styled.input`
   border: none;
-  height: 44px;
-  width: calc(368px - 40px);
+  height: 60px;
+  width: 368px;
   color: #ffffff;
   font-size: 16px;
   line-height: 16px;
   padding: 16px 20px 0 20px;
+  margin: 8px 0;
 
   background: rgba(0, 0, 0, 0.32);
   border-radius: 4px;
@@ -25,7 +26,7 @@ const StyledInput = styled.input`
   &:not(:placeholder-shown) {
     + .input-label {
       font-size: 12px;
-      top: 7px;
+      top: 15px;
     }
   }
 
@@ -35,8 +36,12 @@ const StyledInput = styled.input`
 
     + .input-label {
       font-size: 12px;
-      top: 7px;
+      top: 15px;
     }
+  }
+
+  @media only screen and (max-width: 480px) {
+    width: 90vw;
   }
 `;
 
@@ -44,7 +49,7 @@ const StyledLabel = styled.label`
   position: absolute;
   font-size: 16px;
   color: #ffffff88;
-  top: 23px;
+  top: 26px;
   left: 20px;
   opacity: 1;
 

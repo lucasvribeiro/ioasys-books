@@ -24,6 +24,7 @@ const StyledButton = styled.button`
 
 const Button = ({
   children,
+  className,
   bgColor,
   fnColor,
   border,
@@ -34,6 +35,7 @@ const Button = ({
 }) => {
   return (
     <StyledButton
+      className={className}
       bgColor={bgColor}
       fnColor={fnColor}
       border={border}
@@ -48,6 +50,7 @@ const Button = ({
 };
 
 Button.propTypes = {
+  className: PropTypes.string,
   bgColor: PropTypes.string,
   fnColor: PropTypes.string,
   border: PropTypes.string,
