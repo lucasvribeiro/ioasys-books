@@ -11,13 +11,13 @@ const StyledButton = styled.button`
   border-radius: 44px;
 
   color: ${({ fnColor }) => fnColor};
-  background: ${({ bgColor }) => bgColor};
+  background-color: ${({ bgColor }) => bgColor};
   border: ${({ border }) => border};
   padding: ${({ padding }) => padding};
   font-size: ${({ fontSize }) => fontSize};
 
   &:disabled {
-    background: ${({ bgColor }) => `${bgColor}77`};
+    background-color: ${({ bgColor }) => `${bgColor}77`};
     cursor: not-allowed;
   }
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
+import Popup from "../../components/Popup/Popup";
 
 import "./Login.css";
 
@@ -11,7 +11,9 @@ const Login = () => {
       <Input id="email" type="email" placeholder="Email" />
       <Input id="password" type="password" placeholder="Senha" />
 
-      <Button>Entrar</Button>
+      <Popup content="E-mail e/ou senha inválidos." title="teste">
+        teste
+      </Popup>
     </div>
   );
 };
