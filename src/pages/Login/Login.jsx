@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Input from "../../components/Input/Input";
 import Popup from "../../components/Popup/Popup";
 import Button from "../../components/Button/Button";
-
-import logo from "../../images/logo.png";
+import Header from "../../components/Header/Header";
 
 import "./Login.css";
-import axios from "axios";
 
 const Login = () => {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,9 +27,6 @@ const Login = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.headers);
-
         setUser(res.data);
         setAuth(res.headers);
         setPopupIsVisible(false);
@@ -39,6 +38,26 @@ const Login = () => {
       });
   };
 
+  // const refreshToken = () => {
+  //   console.log(auth["refresh-token"]);
+  //   axios
+  //     .post(
+  //       "https://books.ioasys.com.br/api/v1/auth/refresh-token",
+  //       {
+  //         refreshToken: auth["refresh-token"],
+  //       },
+  //       { headers: { Authorization: auth.authorization } }
+  //     )
+  //     .then((res) => {
+  //       console.log("token refrescado");
+  //       console.log(res.data);
+  //       console.log(res.headers);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   const emailChanged = (e) => {
     setEmail(e.target.value);
   };
@@ -47,13 +66,18 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    if (user && auth) {
+      navigate("/home", { state: { user, auth } });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, auth]);
+
   return (
     <div className="login-page">
       <div className="login-page-container">
-        <div className="login-page-header">
-          <img src={logo} alt="Ioasys Logo" />
-          <span>Books</span>
-        </div>
+        <Header theme="light" />
 
         <div className="login-page-content">
           <Popup

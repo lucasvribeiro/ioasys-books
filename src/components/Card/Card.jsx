@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledCard = styled.div`
   background-color: #ffffff;
@@ -7,7 +8,7 @@ const StyledCard = styled.div`
   height: 160px;
   border-radius: 4px;
   box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.13);
-  padding: 22px 20px;
+  padding: 16px 12px;
   overflow-y: hidden;
 
   transition: all 0.3s ease;
@@ -19,6 +20,10 @@ const StyledCard = styled.div`
 
 const Card = ({ children, className }) => {
   return <StyledCard className={className}>{children}</StyledCard>;
+};
+
+Card.propTypes = {
+  className: PropTypes.string,
 };
 
 export default Card;

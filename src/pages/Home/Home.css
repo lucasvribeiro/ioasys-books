@@ -1,11 +1,106 @@
 .home-page {
   width: 100vw;
   height: 100vh;
+  padding-top: 6vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+.home-page-container {
+  width: fit-content;
+}
+
+.home-page-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  margin-bottom: 36px;
+}
+
+.home-page-books-container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 16px;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.header-welcome span {
+  margin-right: 16px;
 }
 
 .book-card {
-    display: flex;
+  display: flex;
+}
+
+.book-cover-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-cover-container img {
+  height: 122px;
+  width: 81px;
+}
+
+.book-info-container {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-top-info h4,
+.book-top-info p {
+  margin: 0;
+}
+
+.book-top-info p {
+  color: #ab2680;
+  font-size: 12px;
+}
+
+.book-bottom-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #999999;
+}
+
+.home-page-footer-container {
+  text-align: right;
+  height: 10vh;
+}
+
+.home-page-footer-container span {
+  margin-right: 16px;
+}
+
+.home-page-footer-container button {
+  margin: 0 6px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .home-page-books-container {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .home-page-books-container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .home-page-books-container {
+    grid-template-columns: repeat(1, auto);
+  }
+
+  .header-welcome span {
+    display: none;
+  }
 }
