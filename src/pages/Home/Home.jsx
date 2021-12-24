@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { getAuthorization, getUser } from "../../services/auth";
+import {
+  deleteAuthorization,
+  deleteUser,
+  getAuthorization,
+  getUser,
+} from "../../services/auth";
 
 import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
@@ -44,6 +49,13 @@ const Home = () => {
     setModalIsVisible(true);
   };
 
+  const logout = () => {
+    deleteAuthorization();
+    deleteUser();
+
+    navigate("/");
+  };
+
   useEffect(() => {
     if (auth) {
       getBooks();
@@ -73,6 +85,7 @@ const Home = () => {
                 width="32px"
                 height="32px"
                 borderRadius="50%"
+                onClick={logout}
               >
                 <i className="fas fa-sign-out-alt" />
               </Button>
