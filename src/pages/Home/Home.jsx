@@ -7,14 +7,18 @@ import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 
 import "./Home.css";
+import Modalr from "../../components/Modalr/Modalr";
 
 const Home = (props) => {
   let location = useLocation();
 
-  const [user, setUser] = useState(location.state.user);
-  const [auth, setAuth] = useState(location.state.auth);
+  const [user] = useState(location.state.user);
+  const [auth] = useState(location.state.auth);
 
   const [books, setBooks] = useState();
+
+  const [currentBook, setCurrentBook] = useState();
+  const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const getBooks = () => {
     axios
@@ -33,9 +37,19 @@ const Home = (props) => {
       });
   };
 
+  const handleCardClicked = (book) => {
+    setCurrentBook(book);
+    setModalIsVisible(true);
+  };
+
   useEffect(() => {
     getBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
+
+  useEffect(() => {
+    console.log(currentBook);
+  }, [currentBook]);
 
   return (
     <div className="home-page">
@@ -65,7 +79,10 @@ const Home = (props) => {
         <div className="home-page-books-container">
           {books &&
             books?.map((book) => (
-              <Card className="book-card">
+              <Card
+                className="book-card"
+                onClick={() => handleCardClicked(book)}
+              >
                 <div className="book-cover-container">
                   <img src={book.imageUrl} alt="Book Cover" />
                 </div>
@@ -117,6 +134,76 @@ const Home = (props) => {
           </Button>
         </div>
       </div>
+
+      {currentBook && (
+        <Modalr
+          closable={false}
+          visible={modalIsVisible}
+          onCancel={() => setModalIsVisible(false)}
+        >
+          <div className="modal-container">
+            <img src={currentBook.imageUrl} alt="Book Cover" />
+
+            <div className="modal-content-container">
+              <div className="modal-book-top">
+                <h1>{currentBook.title}</h1>
+                <p>
+                  {currentBook.authors.map((author, i) =>
+                    currentBook.authors.length === i + 1
+                      ? `${author}`
+                      : `${author}, `
+                  )}
+                </p>
+              </div>
+
+              <div className="modal-book-middle">
+                <h4>INFORMAÇÕES</h4>
+
+                <div className="modal-book-info">
+                  <span>Páginas</span>
+                  <span>{currentBook.pageCount}</span>
+                </div>
+
+                <div className="modal-book-info">
+                  <span>Editora</span>
+                  <span>{currentBook.publisher}</span>
+                </div>
+
+                <div className="modal-book-info">
+                  <span>Idioma</span>
+                  <span>{currentBook.language}</span>
+                </div>
+
+                <div className="modal-book-info">
+                  <span>Título Original</span>
+                  <span>{currentBook.title}</span>
+                </div>
+
+                <div className="modal-book-info">
+                  <span>ISBN-10</span>
+                  <span>{currentBook.isbn10}</span>
+                </div>
+
+                <div className="modal-book-info">
+                  <span>ISBN-13</span>
+                  <span>{currentBook.isbn13}</span>
+                </div>
+              </div>
+
+              <div className="modal-book-bottom">
+                <h4>RESENHA DA EDITORA</h4>
+                <p>
+                  <i
+                    className="fas fa-quote-left"
+                    style={{ fontSize: "24px", marginRight: "8px" }}
+                  />
+                  {currentBook.description.substring(0, 320)}...
+                </p>
+              </div>
+            </div>
+          </div>
+        </Modalr>
+      )}
     </div>
   );
 };

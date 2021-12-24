@@ -10,6 +10,7 @@ const StyledCard = styled.div`
   box-shadow: 0px 6px 24px rgba(84, 16, 95, 0.13);
   padding: 16px 12px;
   overflow-y: hidden;
+  cursor: pointer;
 
   transition: all 0.3s ease;
 
@@ -18,12 +19,17 @@ const StyledCard = styled.div`
   }
 `;
 
-const Card = ({ children, className }) => {
-  return <StyledCard className={className}>{children}</StyledCard>;
+const Card = ({ children, className, onClick }) => {
+  return (
+    <StyledCard className={className} onClick={onClick}>
+      {children}
+    </StyledCard>
+  );
 };
 
 Card.propTypes = {
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Card;
