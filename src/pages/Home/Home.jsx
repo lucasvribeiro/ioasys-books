@@ -14,33 +14,14 @@ import bookPlaceholder from "../../images/book-placeholder.png";
 
 import "./Home.css";
 
+import { CATEGORIES } from "../../services/categories";
+
 import {
   deleteAuthorization,
   deleteUser,
   getAuthorization,
   getUser,
 } from "../../services/auth";
-
-const CATEGORIES = [
-  { value: "biographies", label: "Biografias" },
-  { value: "collections", label: "Coleções" },
-  { value: "behavior", label: "Auto-ajuda" },
-  { value: "tales", label: "Contos" },
-  { value: "literary-criticism", label: "Crítica Literária" },
-  { value: "scienceFiction", label: "Ficção Científica" },
-  { value: "folklore", label: "Folclore" },
-  { value: "genealogy", label: "Genealogia" },
-  { value: "humor", label: "Humor" },
-  { value: "children", label: "Infantil" },
-  { value: "games", label: "Jogos" },
-  { value: "newspapers", label: "Jornais" },
-  { value: "brazilian-literature", label: "Literatura Brasileira" },
-  { value: "foreign-literature", label: "Literatura Estrangeira" },
-  { value: "rare-books", label: "Livros Raros" },
-  { value: "manuscripts", label: "Manuscritos" },
-  { value: "poetry", label: "Poesia" },
-  { value: "another-subjects", label: "Outros Assuntos" },
-];
 
 const Home = () => {
   let navigate = useNavigate();
