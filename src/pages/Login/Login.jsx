@@ -36,6 +36,7 @@ const Login = () => {
       .then((res) => {
         setAuthorization(res.headers.authorization);
         setUser(res.data);
+
         navigate("/home");
 
         setPopupIsVisible(false);
@@ -57,6 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (auth && user) navigate("/home");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
