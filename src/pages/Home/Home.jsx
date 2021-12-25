@@ -8,10 +8,11 @@ import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import Modalr from "../../components/Modalr/Modalr";
 import Loader from "../../components/Loader/Loader";
-
-import "./Home.css";
+import Select from "../../components/Select/Select";
 
 import bookPlaceholder from "../../images/book-placeholder.png";
+
+import "./Home.css";
 
 import {
   deleteAuthorization,
@@ -20,8 +21,30 @@ import {
   getUser,
 } from "../../services/auth";
 
+const CATEGORIES = [
+  { value: "biographies", label: "Biografias" },
+  { value: "collections", label: "Coleções" },
+  { value: "behavior", label: "Auto-ajuda" },
+  { value: "tales", label: "Contos" },
+  { value: "literary-criticism", label: "Crítica Literária" },
+  { value: "scienceFiction", label: "Ficção Científica" },
+  { value: "folklore", label: "Folclore" },
+  { value: "genealogy", label: "Genealogia" },
+  { value: "humor", label: "Humor" },
+  { value: "children", label: "Infantil" },
+  { value: "games", label: "Jogos" },
+  { value: "newspapers", label: "Jornais" },
+  { value: "brazilian-literature", label: "Literatura Brasileira" },
+  { value: "foreign-literature", label: "Literatura Estrangeira" },
+  { value: "rare-books", label: "Livros Raros" },
+  { value: "manuscripts", label: "Manuscritos" },
+  { value: "poetry", label: "Poesia" },
+  { value: "another-subjects", label: "Outros Assuntos" },
+];
+
 const Home = () => {
   let navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
 
   const [user] = useState(getUser());
@@ -35,12 +58,14 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  const [category, setCategory] = useState("biographies");
+
   const fetchBooks = () => {
     setLoading(true);
 
     axios
       .get(
-        `https://books.ioasys.com.br/api/v1/books?page=${page}&amount=12&category=scienceFiction`,
+        `https://books.ioasys.com.br/api/v1/books?page=${page}&amount=12&category=${category}`,
         {
           headers: { authorization: `Bearer ${auth}` },
         }
@@ -77,12 +102,23 @@ const Home = () => {
     setPage(page + 1);
   };
 
+  const categoryChanged = (category) => {
+    setCategory(category);
+  };
+
   useEffect(() => {
+    fetchBooks();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category]);
+
+  useEffect(() => {
+    console.log("teste");
     if (auth) fetchBooks();
     else navigate("/");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, category]);
 
   useEffect(() => {
     if (user) message.info(`Autenticado como ${user.name}.`);
@@ -95,6 +131,14 @@ const Home = () => {
           <div className="home-page-container">
             <div className="home-page-header-container">
               <Header theme="dark" />
+
+              <div className="category-select">
+                <Select
+                  defaultValue={"biographies"}
+                  values={CATEGORIES}
+                  onChange={categoryChanged}
+                />
+              </div>
 
               <div className="header-welcome">
                 <span>

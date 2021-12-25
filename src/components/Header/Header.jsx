@@ -11,9 +11,20 @@ const StyledHeader = styled.div`
     display: inline-block;
     vertical-align: middle;
     line-height: 28px;
-    margin: 0 0 0 12px;
+    margin-left: 12px;
     padding: 0;
     color: ${(props) => (props.theme === "dark" ? "#333333" : "#FFFFFF")};
+  }
+
+  @media only screen and (max-width: 480px) {
+    > img {
+      width: 80px;
+    }
+
+    > span {
+      font-size: 24px;
+      margin-left: 6px;
+    }
   }
 `;
 
