@@ -7,7 +7,7 @@ A web application to show books informations.
 ### 📚 Stack Used:
 
 - React 17.0.2
-- npm 6.14.15
+- npm 8.3.0
 
 ### 🏃 Running Steps:
 
