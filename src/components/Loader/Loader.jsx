@@ -6,7 +6,7 @@ const StyledLoader = styled(Spin)`
   max-height: none !important;
 
   .ant-spin-dot-item {
-      background-color: #B22E6F !important;
+    background-color: #b22e6f !important;
   }
 `;
 
@@ -24,7 +24,7 @@ Loader.propTypes = {
 };
 
 Loader.defaultProps = {
-  size: "middle",
+  size: "middle", // "small", "middle" or "large"
   loading: false,
 };
 

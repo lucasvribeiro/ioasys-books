@@ -4,19 +4,20 @@ import PropTypes from "prop-types";
 const StyledButton = styled.button`
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   color: ${({ fnColor }) => fnColor};
   background-color: ${({ bgColor }) => bgColor};
+
   padding: ${({ padding }) => padding};
   font-size: ${({ fontSize }) => fontSize};
+
   border-radius: ${({ borderRadius }) => borderRadius || "44px"};
   border: ${({ borderColor }) =>
     borderColor !== "none" ? `1px solid ${borderColor}` : "none"};
 
   width: ${({ width }) => width || "fit-content"};
   height: ${({ height }) => height || "fit-content"};
-
-  transition: all 0.2s ease;
 
   &:hover {
     color: ${({ fnColor }) => `${fnColor}cc`};
@@ -25,12 +26,12 @@ const StyledButton = styled.button`
   }
 
   &:disabled {
+    cursor: not-allowed;
+
     background-color: ${({ bgColor }) => `${bgColor}77`};
     color: ${({ fnColor }) => `${fnColor}77`};
     border: ${({ borderColor }) =>
       borderColor !== "none" ? `1px solid ${borderColor}77` : "none"};
-
-    cursor: not-allowed;
   }
 `;
 

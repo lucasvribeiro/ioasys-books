@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import Input from "../../components/Input/Input";
+import Popup from "../../components/Popup/Popup";
+import Button from "../../components/Button/Button";
+import Header from "../../components/Header/Header";
+import Loader from "../../components/Loader/Loader";
+
+import "./Login.css";
+
 import {
   getAuthorization,
   getUser,
   setAuthorization,
   setUser,
 } from "../../services/auth";
-
-import Input from "../../components/Input/Input";
-import Popup from "../../components/Popup/Popup";
-import Button from "../../components/Button/Button";
-import Header from "../../components/Header/Header";
-
-import "./Login.css";
-import Loader from "../../components/Loader/Loader";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -89,6 +89,7 @@ const Login = () => {
                 type="email"
                 placeholder="Email"
               />
+
               <Input
                 value={password}
                 onChange={passwordChanged}
@@ -97,6 +98,7 @@ const Login = () => {
                 placeholder="Senha"
               />
             </Popup>
+
             <Button onClick={login} className="login-button" disabled={loading}>
               {loading && (
                 <>

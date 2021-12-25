@@ -78,16 +78,14 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (auth) {
-      fetchBooks();
-    } else {
-      navigate("/");
-    }
+    if (auth) fetchBooks();
+    else navigate("/");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   useEffect(() => {
-    message.info(`Autenticado como ${user.name}.`);
+    if (user) message.info(`Autenticado como ${user.name}.`);
   }, [user]);
 
   return (
@@ -132,6 +130,7 @@ const Home = () => {
                         alt="Book Cover"
                       />
                     </div>
+
                     <div className="book-info-container">
                       <div className="book-top-info">
                         <h4>{book.title}</h4>
@@ -158,6 +157,7 @@ const Home = () => {
               <span>
                 Página <b>{page}</b> de <b>{totalPages}</b>
               </span>
+
               <Button
                 bgColor="transparent"
                 fnColor="#333333"
@@ -171,6 +171,7 @@ const Home = () => {
               >
                 <i className="fas fa-chevron-left" />
               </Button>
+
               <Button
                 bgColor="transparent"
                 fnColor="#333333"
@@ -202,6 +203,7 @@ const Home = () => {
                 <div className="modal-content-container">
                   <div className="modal-book-top">
                     <h1>{currentBook.title}</h1>
+
                     <p>
                       {currentBook.authors.map((author, i) =>
                         currentBook.authors.length === i + 1

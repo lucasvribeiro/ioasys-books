@@ -1,3 +1,5 @@
+/* Home Page Styles */
+
 .home-page {
   height: 100vh;
   width: 100vw;
@@ -34,6 +36,22 @@
   margin-right: 16px;
   font-size: 12px;
 }
+
+.home-page-footer-container {
+  text-align: right;
+  height: 10vh;
+}
+
+.home-page-footer-container span {
+  margin-right: 12px;
+  font-size: 12px;
+}
+
+.home-page-footer-container button {
+  margin: 0 6px;
+}
+
+/* Book Card Styles */
 
 .book-card {
   display: flex;
@@ -74,19 +92,7 @@
   color: #999999;
 }
 
-.home-page-footer-container {
-  text-align: right;
-  height: 10vh;
-}
-
-.home-page-footer-container span {
-  margin-right: 12px;
-  font-size: 12px;
-}
-
-.home-page-footer-container button {
-  margin: 0 6px;
-}
+/* Modal Styles */
 
 .modal-container {
   display: flex;
@@ -146,6 +152,8 @@
 .modal-book-bottom p {
   color: #999999;
 }
+
+/* Responsivity */
 
 @media only screen and (max-width: 1200px) {
   .home-page-books-container {

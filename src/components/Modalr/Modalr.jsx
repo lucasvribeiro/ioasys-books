@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Modal } from "antd";
+
 import Button from "../Button/Button";
 
 const StyledModal = styled(Modal)`
