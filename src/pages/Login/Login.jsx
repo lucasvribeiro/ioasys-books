@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import Input from "../../components/Input/Input";
 import Popup from "../../components/Popup/Popup";
@@ -10,12 +9,14 @@ import Loader from "../../components/Loader/Loader";
 
 import "./Login.css";
 
+import { login } from "../../services/integrationAPI";
+
 import {
   getAuthorization,
   getUser,
   setAuthorization,
   setUser,
-} from "../../services/auth";
+} from "../../services/loginSession";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -30,21 +31,16 @@ const Login = () => {
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
 
-  const login = () => {
+  const handleLogin = () => {
     setLoading(true);
 
-    axios
-      .post("https://books.ioasys.com.br/api/v1/auth/sign-in", {
-        email,
-        password,
-      })
+    login(email, password)
       .then((res) => {
         setAuthorization(res.headers.authorization);
         setUser(res.data);
         setLoading(false);
 
         navigate("/home");
-
         setPopupIsVisible(false);
       })
       .catch((error) => {
@@ -99,7 +95,11 @@ const Login = () => {
               />
             </Popup>
 
-            <Button onClick={login} className="login-button" disabled={loading}>
+            <Button
+              onClick={handleLogin}
+              className="login-button"
+              disabled={loading}
+            >
               {loading && (
                 <>
                   <Loader loading={true} size="small"></Loader>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import axios from "axios";
 
 import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
@@ -12,16 +11,18 @@ import Select from "../../components/Select/Select";
 
 import bookPlaceholder from "../../images/book-placeholder.png";
 
-import "./Home.css";
-
 import { CATEGORIES } from "../../services/categories";
+
+import { fetchBooks } from "../../services/integrationAPI";
 
 import {
   deleteAuthorization,
   deleteUser,
   getAuthorization,
   getUser,
-} from "../../services/auth";
+} from "../../services/loginSession";
+
+import "./Home.css";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -41,16 +42,10 @@ const Home = () => {
 
   const [category, setCategory] = useState("biographies");
 
-  const fetchBooks = () => {
+  const handleFetchBooks = () => {
     setLoading(true);
 
-    axios
-      .get(
-        `https://books.ioasys.com.br/api/v1/books?page=${page}&amount=12&category=${category}`,
-        {
-          headers: { authorization: `Bearer ${auth}` },
-        }
-      )
+    fetchBooks(page, category, auth)
       .then((res) => {
         setTotalPages(Math.ceil(res.data.totalPages));
         setBooks(res.data.data);
@@ -89,13 +84,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchBooks();
+    handleFetchBooks();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   useEffect(() => {
-    if (auth) fetchBooks();
+    if (auth) handleFetchBooks();
     else navigate("/");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
