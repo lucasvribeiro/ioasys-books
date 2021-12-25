@@ -104,6 +104,7 @@ const Home = () => {
 
   const categoryChanged = (category) => {
     setCategory(category);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -113,7 +114,6 @@ const Home = () => {
   }, [category]);
 
   useEffect(() => {
-    console.log("teste");
     if (auth) fetchBooks();
     else navigate("/");
 
@@ -179,17 +179,18 @@ const Home = () => {
                       <div className="book-top-info">
                         <h4>{book.title}</h4>
                         <p>
-                          {book.authors.map((author, i) =>
-                            book.authors.length === i + 1
-                              ? `${author}`
-                              : `${author}, `
+                          {book.authors.map(
+                            (author, i) =>
+                              ((i === 1 || book.authors.length === 1) &&
+                                `${author}.`) ||
+                              (i < 1 && `${author}, `)
                           )}
                         </p>
                       </div>
 
                       <div className="book-bottom-info">
                         <p>{book.pageCount} páginas</p>
-                        <p>Editora {book.publisher.substring(0, 17)}...</p>
+                        <p>Editora {book.publisher.substring(0, 15)}...</p>
                         <p>Publicado em {book.published}</p>
                       </div>
                     </div>

@@ -43,7 +43,9 @@ const Select = ({ values, defaultValue, onChange }) => {
       defaultValue={defaultValue}
     >
       {values.map((opt) => (
-        <Option value={opt.value}>{opt.label}</Option>
+        <Option key={opt.value} value={opt.value}>
+          {opt.label}
+        </Option>
       ))}
     </StyledSelect>
   );
