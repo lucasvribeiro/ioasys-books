@@ -1,24 +1,35 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-// import loadingGif from "../../images/loading.gif";
-
 const StyledButton = styled.button`
   font-weight: 500;
   cursor: pointer;
 
   color: ${({ fnColor }) => fnColor};
   background-color: ${({ bgColor }) => bgColor};
-  border: ${({ border }) => border};
   padding: ${({ padding }) => padding};
   font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ borderRadius }) => borderRadius || "44px"};
+  border: ${({ borderColor }) =>
+    borderColor !== "none" ? `1px solid ${borderColor}` : "none"};
 
   width: ${({ width }) => width || "fit-content"};
   height: ${({ height }) => height || "fit-content"};
 
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ fnColor }) => `${fnColor}cc`};
+    border: ${({ borderColor }) =>
+      borderColor !== "none" ? `1px solid ${borderColor}cc` : "none"};
+  }
+
   &:disabled {
     background-color: ${({ bgColor }) => `${bgColor}77`};
+    color: ${({ fnColor }) => `${fnColor}77`};
+    border: ${({ borderColor }) =>
+      borderColor !== "none" ? `1px solid ${borderColor}77` : "none"};
+
     cursor: not-allowed;
   }
 `;
@@ -28,7 +39,7 @@ const Button = ({
   className,
   bgColor,
   fnColor,
-  border,
+  borderColor,
   fontSize,
   padding,
   borderRadius,
@@ -42,7 +53,7 @@ const Button = ({
       className={className}
       bgColor={bgColor}
       fnColor={fnColor}
-      border={border}
+      borderColor={borderColor}
       fontSize={fontSize}
       padding={padding}
       borderRadius={borderRadius}
@@ -60,7 +71,7 @@ Button.propTypes = {
   className: PropTypes.string,
   bgColor: PropTypes.string,
   fnColor: PropTypes.string,
-  border: PropTypes.string,
+  borderColor: PropTypes.string,
   fontSize: PropTypes.string,
   borderRadius: PropTypes.string,
   width: PropTypes.string,
@@ -73,7 +84,7 @@ Button.propTypes = {
 Button.defaultProps = {
   bgColor: "#FFFFFF",
   fnColor: "#B22E6F",
-  border: "none",
+  borderColor: "none",
   fontSize: "16px",
   padding: "6px 21px",
   borderRadius: "44px",

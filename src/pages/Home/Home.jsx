@@ -7,8 +7,11 @@ import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
 import Button from "../../components/Button/Button";
 import Modalr from "../../components/Modalr/Modalr";
+import Loader from "../../components/Loader/Loader";
 
 import "./Home.css";
+
+import bookPlaceholder from "../../images/book-placeholder.png";
 
 import {
   deleteAuthorization,
@@ -16,7 +19,6 @@ import {
   getAuthorization,
   getUser,
 } from "../../services/auth";
-import Loader from "../../components/Loader/Loader";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -104,10 +106,10 @@ const Home = () => {
                 <Button
                   bgColor="transparent"
                   fnColor="#333333"
-                  border="1px solid #333333"
-                  padding="3px"
-                  width="32px"
-                  height="32px"
+                  borderColor="#333333"
+                  padding="2px"
+                  width="30px"
+                  height="30px"
                   borderRadius="50%"
                   onClick={logout}
                 >
@@ -125,7 +127,10 @@ const Home = () => {
                     onClick={() => handleCardClicked(book)}
                   >
                     <div className="book-cover-container">
-                      <img src={book.imageUrl} alt="Book Cover" />
+                      <img
+                        src={book.imageUrl || bookPlaceholder}
+                        alt="Book Cover"
+                      />
                     </div>
                     <div className="book-info-container">
                       <div className="book-top-info">
@@ -141,7 +146,7 @@ const Home = () => {
 
                       <div className="book-bottom-info">
                         <p>{book.pageCount} páginas</p>
-                        <p>Editora {book.publisher}</p>
+                        <p>Editora {book.publisher.substring(0, 17)}...</p>
                         <p>Publicado em {book.published}</p>
                       </div>
                     </div>
@@ -151,15 +156,15 @@ const Home = () => {
 
             <div className="home-page-footer-container">
               <span>
-                Página {page} de {totalPages}
+                Página <b>{page}</b> de <b>{totalPages}</b>
               </span>
               <Button
                 bgColor="transparent"
                 fnColor="#333333"
-                border="1px solid #333333"
-                padding="4px"
-                width="32px"
-                height="32px"
+                borderColor="#333333"
+                padding="2px"
+                width="30px"
+                height="30px"
                 borderRadius="50%"
                 disabled={page === 1}
                 onClick={previousPage}
@@ -169,10 +174,10 @@ const Home = () => {
               <Button
                 bgColor="transparent"
                 fnColor="#333333"
-                border="1px solid #333333"
-                padding="4px"
-                width="32px"
-                height="32px"
+                borderColor="#333333"
+                padding="2px"
+                width="30px"
+                height="30px"
                 borderRadius="50%"
                 disabled={page === totalPages}
                 onClick={nextPage}
@@ -189,7 +194,10 @@ const Home = () => {
               onCancel={() => setModalIsVisible(false)}
             >
               <div className="modal-container">
-                <img src={currentBook.imageUrl} alt="Book Cover" />
+                <img
+                  src={currentBook.imageUrl || bookPlaceholder}
+                  alt="Book Cover"
+                />
 
                 <div className="modal-content-container">
                   <div className="modal-book-top">
@@ -208,7 +216,7 @@ const Home = () => {
 
                     <div className="modal-book-info">
                       <span>Páginas</span>
-                      <span>{currentBook.pageCount}</span>
+                      <span>{currentBook.pageCount} páginas</span>
                     </div>
 
                     <div className="modal-book-info">
@@ -242,9 +250,9 @@ const Home = () => {
                     <p>
                       <i
                         className="fas fa-quote-left"
-                        style={{ fontSize: "24px", marginRight: "8px" }}
+                        style={{ fontSize: "20px", marginRight: "8px" }}
                       />
-                      {currentBook.description.substring(0, 320)}...
+                      {currentBook.description}...
                     </p>
                   </div>
                 </div>

@@ -13,9 +13,9 @@ const StyledModal = styled(Modal)`
 
   .ant-modal-content {
     border-radius: 4px !important;
-    overflow-y: scroll !important;
-    overflow-x: scroll !important;
-    height: 608px !important;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    height: fit-content !important;
     position: initial !important;
   }
 
@@ -31,6 +31,10 @@ const StyledModal = styled(Modal)`
 
   @media only screen and (max-width: 768px) {
     width: 90vw !important;
+
+    .ant-modal-body {
+      padding: 28px !important;
+    }
   }
 `;
 

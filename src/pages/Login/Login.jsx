@@ -15,9 +15,12 @@ import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 
 import "./Login.css";
+import Loader from "../../components/Loader/Loader";
 
 const Login = () => {
   let navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const [user] = useState(getUser());
   const [auth] = useState(getAuthorization());
@@ -28,6 +31,8 @@ const Login = () => {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
 
   const login = () => {
+    setLoading(true);
+
     axios
       .post("https://books.ioasys.com.br/api/v1/auth/sign-in", {
         email,
@@ -36,15 +41,19 @@ const Login = () => {
       .then((res) => {
         setAuthorization(res.headers.authorization);
         setUser(res.data);
+        setLoading(false);
 
         navigate("/home");
 
         setPopupIsVisible(false);
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        console.log(error);
+        if (error.response.status === 401 || error.response.status === 400) {
           setPopupIsVisible(true);
         }
+
+        setLoading(false);
       });
   };
 
@@ -70,7 +79,7 @@ const Login = () => {
 
           <div className="login-page-content">
             <Popup
-              content="E-mail e/ou senha inválidos."
+              content="E-mail e/ou senha incorretos."
               visible={popupIsVisible}
             >
               <Input
@@ -88,7 +97,13 @@ const Login = () => {
                 placeholder="Senha"
               />
             </Popup>
-            <Button onClick={login} className="login-button">
+            <Button onClick={login} className="login-button" disabled={loading}>
+              {loading && (
+                <>
+                  <Loader loading={true} size="small"></Loader>
+                  &nbsp;&nbsp;
+                </>
+              )}
               Entrar
             </Button>
           </div>

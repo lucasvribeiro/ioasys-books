@@ -7,8 +7,8 @@ import darkLogo from "../../images/logo-dark.png";
 
 const StyledHeader = styled.div`
   > span {
-    font-weight: 100;
-    font-size: 26px;
+    font-weight: 200;
+    font-size: 28px;
     display: inline-block;
     vertical-align: middle;
     line-height: 28px;
