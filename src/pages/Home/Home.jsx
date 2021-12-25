@@ -20,6 +20,7 @@ import Loader from "../../components/Loader/Loader";
 
 const Home = () => {
   let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const [user] = useState(getUser());
   const [auth] = useState(getAuthorization());
@@ -33,6 +34,8 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   const fetchBooks = () => {
+    setLoading(true);
+
     axios
       .get(
         `https://books.ioasys.com.br/api/v1/books?page=${page}&amount=12&category=scienceFiction`,
@@ -43,9 +46,11 @@ const Home = () => {
       .then((res) => {
         setTotalPages(Math.ceil(res.data.totalPages));
         setBooks(res.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -85,7 +90,7 @@ const Home = () => {
 
   return (
     auth && (
-      <Loader loading={true}>
+      <Loader loading={loading}>
         <div className="home-page">
           <div className="home-page-container">
             <div className="home-page-header-container">
